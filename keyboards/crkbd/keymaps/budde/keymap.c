@@ -1,11 +1,9 @@
 #include QMK_KEYBOARD_H
 #include "bootloader.h"
-
 #ifdef PROTOCOL_LUFA
   #include "lufa.h"
   #include "split_util.h"
 #endif
-
 #ifdef SSD1306OLED
   #include "ssd1306.h"
 #endif
@@ -39,7 +37,7 @@ enum custom_keycodes {
 };
 
 enum macro_keycodes {
-  KC_SAMPLEMACRO, // I believe this is the macro that allows me to just but "Q" in the keymap instead of KC_Q, but I'm not 100% sure :)
+  KC_SAMPLEMACRO,// I believe this is the macro that allows me to just but "Q" in the keymap instead of KC_Q, but I'm not 100% sure :)
 };
 
 #define KC______ KC_TRNS
@@ -99,25 +97,23 @@ enum macro_keycodes {
 #define KC_SE_PIPE RALT(KC_NUBS)
 
 
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_kc( \
-  //,-----------------------------------------.                ,-----------------------------------------.  // all SE_ keys are my own custom keybinds to translate
-        TAB,     Q,     W,     E,     R,     T,                      Y,     U,     I,     O,     P, SE_AA,\ // input to swedish characters, and I think it's easier
-  //|------+------+------+------+------+------|                |------+------+------+------+------+------|  // to follow along if they are not defined in the actual
-        ESC,     A,     S,     D,     F,     G,                      H,     J,     K,     L, SE_OE, SE_AE,\ // layout config.
+  //,-----------------------------------------.                ,-----------------------------------------.
+        ESC,     Q,     W,     E,     R,     T,                      Y,     U,     I,     O,     P,  SE_AA,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-       CTRL,     Z,     X,     C,     V,     B,                      N,     M,  COMM,   DOT,  SLSH,  LSFT,\ // -- didn't know what to put the far right here... why not left shift
+        TAB,     A,     S,     D,     F,     G,                      H,     J,     K,     L,  SE_OE, SE_AE,\
+  //|------+------+------+------+------+------|                |------+------+------+------+------+------|
+       CTRL,     Z,     X,     C,     V,     B,                      N,     M,  COMM,   DOT,  SLSH,  RSFT,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                LALT, MYLOWER, MYSFT,     SPC, MYRAISE, LSFT \ // same here... another tribute to Janzon who had 9+ LSHIFTs at one point... I think
+                                  LALT, MYLOWER, MYSFT,   SPC, MYRAISE, LALT \
                               //`--------------------'  `--------------------'
   ),
 
-
   [_LOWER] = LAYOUT_kc( \
   //,-----------------------------------------------.                  ,-----------------------------------------------.
-    SE_EURO,    EXLM,  SE_AT,SE_LCBR,SE_RCBR,SE_ACUT,                      PERC,   7   ,   8   ,   9   ,SE_ASTR,SE_QUES,\ // everything math/number oriented on right side,
-  //|-------+-------+-------+-------+-------+-------|                  |-------+-------+-------+-------+-------+-------|  // special characters on left side
+    SE_EURO,    EXLM,  SE_AT,SE_LCBR,SE_RCBR,SE_ACUT,                      PERC,   7   ,   8   ,   9   ,SE_ASTR,SE_QUES,\
+  //|-------+-------+-------+-------+-------+-------|                  |-------+-------+-------+-------+-------+-------|
     SE_DLR,  SE_QUO,SE_DQUO,SE_LPRN,SE_RPRN,SE_GRAV,                   SE_MORE,   4   ,   5   ,   6   ,SE_PLUS,SE_EQAL,\
   //|-------+-------+-------+-------+-------+-------|                  |-------+-------+-------+-------+-------+-------|
     SE_GBP,    HASH,SE_CIRC,SE_LBRC,SE_RBRC,SE_AMPR,                   SE_LESS,   1   ,   2   ,   3   ,SE_SLSH,SE_BSLH,\
@@ -125,23 +121,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                     SE_PARA,  TRNS, SE_PIPE,   SE_HALF,SE_TILD,   0   \
                                   //`-----------------------'  `-----------------------'
   ),
-
-
+	
   [_RAISE] = LAYOUT_kc( \
-  //,-----------------------------------------.                ,-----------------------------------------.
-      RST  , LRST , _____, _____, _____,JANZON,                   HOME,  PGDN,  PGUP,  END,   INS,  PSCR,\  // left side for RGB controls and reset button
-  //|------+------+------+------+------+------|                |------+------+------+------+------+------|  // right side for navigation and media keys
-      LTOG , LHUI , LSAI , LVAI , LMOD , _____,                   LEFT,  DOWN,   UP , RIGHT, XXXXX, VOLU,\
+ //,-----------------------------------------.                ,-----------------------------------------.
+      RST  , LRST , _____, _____, _____,JANZON,                   HOME,  PGDN,  PGUP,  END,   INS,  PSCR,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-    _____ , LHUD , LSAD , LVAD , _____, _____,                   MPRV,  MUTE,  MPLY,  MNXT, XXXXX, VOLD,\
+      LTOG , LHUI , LSAI , LVAI , LMOD , _____,                   LEFT,  DOWN,   UP , RIGHT, WH_U , VOLU,\
+  //|------+------+------+------+------+------|                |------+------+------+------+------+------|
+     _____ , LHUD , LSAD , LVAD , _____, _____,                   MPRV,  MUTE,  MPLY,  MNXT, WH_D, VOLD,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                LALT, TRNS,    MYSFT,     SPC,   TRNS, LGUI \
+                                LALT, TRNS,    MYSFT,     SPC,   TRNS, LALT \
                               //`--------------------'  `--------------------'
   ),
-
-
-
-  [_ADJUST] = LAYOUT_kc( \
+ [_ADJUST] = LAYOUT_kc( \
   //,-----------------------------------------.                ,-----------------------------------------.
         _____,  _____, _____, _____, _____, _____,                  _____, _____, _____, _____, _____, _____,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
@@ -152,7 +144,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                   _____, _____,   _____,      _____, _____, _____ \
                               //`--------------------'  `--------------------'
   )
-
 };
 
 
@@ -196,11 +187,11 @@ uint32_t layer_state_set_user(uint32_t state) {
         rgblight_enable();
         if(isLeftHand) {                        // this sets the underside LEDs (1-6) to cyan on both sides and does nothing with the rest.
           for(int i=0; i < 6; i ++) {           // this also means that if I manually change LED color to red, the bottom 6 LEDS will ALWAYS be cyan.
-            rgblight_setrgb_at(0, 255, 150, i); // it's the only way I found to make it switch back to underglow LEDs after I've used another layer.
+            rgblight_setrgb_at(0, 0, 255, i); // it's the only way I found to make it switch back to underglow LEDs after I've used another layer.
           }
         } else {
           for(int j=0; j < 6; j ++) {
-            rgblight_setrgb_at(0, 255, 150, j);
+            rgblight_setrgb_at(0, 0, 255, j);
           }
         }
         break;
@@ -251,7 +242,7 @@ const char *read_keylogs(void);
 // const char *read_timelog(void);
 
 void matrix_scan_user(void) {
-  iota_gfx_task();
+   iota_gfx_task();
 }
 
 void matrix_render_user(struct CharacterMatrix *matrix) {

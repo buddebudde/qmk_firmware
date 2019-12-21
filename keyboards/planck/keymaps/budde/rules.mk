@@ -1,5 +1,5 @@
 SRC += muse.c
+EXTRAFLAGS += -flto
 BACKLIGHT_ENABLE = yes
 SLEEP_LED_ENABLE = yes
-BACKLIGHT_ENABLE = yes
 AUDIO_ENABLE = yes
