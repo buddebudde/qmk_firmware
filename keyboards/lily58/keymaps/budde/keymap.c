@@ -31,11 +31,12 @@ enum custom_keycodes {
   ADJUST,
   GAME,
   SMILEY,
-  SADSMILEY
+  SADSMILEY,
+  RGBRST
 };
 
 enum macro_keycodes {
-  KC_SAMPLEMACRO,// I believe this is the macro that allows me to just but "Q" in the keymap instead of KC_Q, but I'm not 100% sure :)
+  KC_SAMPLEMACRO,
 };
 
 #define KC______ KC_TRNS
@@ -100,11 +101,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * | ESC  |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  Back|
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | Tab  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  |  -   |
+ * | Tab  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  |  Å   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | Tab  |   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |  '   |
+ * | Tab  |   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   Ö  |  Ä   |
  * |------+------+------+------+------+------|   :(  |    |   :)  |------+------+------+------+------+------|
- * | Ctrl |   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift|
+ * | Ctrl |   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   -  |RShift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *                   | LAlt | LAlt | Del/  |/ Back/ /       \space \  |enter/ |RShift| RGUI |
  *                   |      |      | lower | shift /         \      \ | raise |      |      |
@@ -157,10 +158,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_RAISE] = LAYOUT( \
   KC_RST,  _______, _______, _______, _______, _______,                           _______,    _______,      _______, _______, _______,  KC_RST, \
-  KC_F1,   KC_F2,    KC_F3,   KC_F4,   KC_F5,   KC_F6,                            KC_HOME,    KC_PGDN,      KC_PGUP, KC_END,  _______, _______, \
-  KC_F7,   KC_F8,    KC_F9,   KC_F10,  KC_F11,  KC_F12,                           KC_LEFT,    KC_DOWN,        KC_UP, KC_RGHT, KC_WH_U, KC_VOLU, \
-  _______, _______, _______,  _______, _______, _______, _______,        _______, KC_MPRV, KC_SE_MUTE,  KC_SE_PLAYP, KC_MNXT, KC_WH_D, KC_VOLD, \
-                              _______, _______, _______, _______,        _______, _______,    _______,    TO(_GAME)\
+  _______, KC_LRST, _______, _______, _______, _______,                           KC_HOME,    KC_PGDN,      KC_PGUP, KC_END,  _______, _______, \
+  KC_LTOG, KC_LHUI, KC_LSAI, KC_LVAI, KC_LMOD, _______,                           KC_LEFT,    KC_DOWN,        KC_UP, KC_RGHT, KC_WH_U, KC_VOLU, \
+  _______, KC_LHUD, KC_LSAD, KC_LVAD, _______, _______, _______,        _______,  KC_MPRV, KC_SE_MUTE,  KC_SE_PLAYP, KC_MNXT, KC_WH_D, KC_VOLD, \
+                              _______,_______, _______, _______,        _______, _______,    _______,    TO(_GAME)\
 ),
 /* ADJUST
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -179,16 +180,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ADJUST] = LAYOUT( \
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, \
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD,\
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,\
                              _______, _______, _______, _______, _______,  _______, _______, _______  \
   ),
 
  [_GAME] = LAYOUT( \
   KC_ESC,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC, \
   KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_SE_AA, \
-  KC_CAPS,  KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SE_OE, KC_SE_AE, \
-  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_F5,  KC_SE_RPRN,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT, \
+  KC_CAPS,  KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SE_OE,    KC_SE_AE, \
+  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_F5,  KC_SE_RPRN, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,    KC_RSFT,\
                       KC_CTRL, KC_LALT, KC_RALT,  KC_SPC,  KC_SPC,  KC_MYRAISE,   KC_RSFT,   TO(_QWERTY) \
 ),
 };
@@ -212,6 +213,16 @@ void matrix_init_user(void) {
     #ifdef SSD1306OLED
         iota_gfx_init(!has_usb());   // turns on the display
     #endif
+}
+
+void encoder_update_user(bool clockwise) { 
+
+		if (clockwise) { 
+			tap_code16(KC_A); 
+			} else { 
+			tap_code16(KC_B); 
+		} 
+
 }
 
 //SSD1306 OLED update loop, make sure to add #define SSD1306OLED in config.h
@@ -325,6 +336,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
        }  
 	   return false;
        break;
-    }
+   case RGBRST:
+      #ifdef RGBLIGHT_ENABLE
+        if (record->event.pressed) {
+          eeconfig_update_rgblight_default();
+          rgblight_enable();
+          RGB_current_mode = rgblight_config.mode;
+        }
+      #endif
+      break;
+  }
   return true;
 }
