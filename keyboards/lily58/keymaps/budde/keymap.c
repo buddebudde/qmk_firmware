@@ -94,6 +94,7 @@ enum macro_keycodes {
 #define KC_SE_QUES S(KC_MINS)
 #define KC_SE_BSLH RALT(KC_MINS)
 #define KC_SE_PIPE RALT(KC_NUBS)
+#define MEDIA_KEY_DELAY 10
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -215,12 +216,12 @@ void matrix_init_user(void) {
     #endif
 }
 
-void encoder_update_user(bool clockwise) { 
+void encoder_update_user(uint8_t index,bool clockwise) { 
 
 		if (clockwise) { 
-			tap_code16(KC_A); 
+			tap_code(KC_A); 
 			} else { 
-			tap_code16(KC_B); 
+			tap_code(KC_PGDN); 
 		} 
 
 }
